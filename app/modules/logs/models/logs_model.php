@@ -8,7 +8,6 @@ class logs_model extends MY_Model {
 
 	public function getSchedules($type = ""){
 
-        $this->db->query("DELETE FROM instagram_history WHERE id IN (SELECT temp.id FROM (SELECT *  FROM instagram_history GROUP BY pk,type HAVING count(pk)>1) AS temp)");
 
         $this->db->select('history.*, account.username');
 
