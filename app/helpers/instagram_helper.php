@@ -3001,10 +3001,12 @@ if(!function_exists("Instagram_Post")){
                         }
                     }
                     if($unfollow_source==1&&$unfollow_followers==0){
+
+                echo '<br>->';
                         try {
                             $users  = Instagram_Get_Feed($i, 'following');
                             if(!empty($users)&&is_array($users)){
-                                $users=removeUserBlackLists($users,$blacklist_usernames);
+                                echo $users=removeUserBlackLists($users,$blacklist_usernames);
                             }
                             if(!empty($users)){
                                 $index  = array_rand($users);

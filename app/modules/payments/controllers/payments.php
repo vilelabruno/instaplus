@@ -330,7 +330,7 @@ class payments extends MX_Controller {
 			}
 		}
 
-		redirect(PATH);
+		//redirect(PATH);
 	}
 
 	public function do_payment_recurring(){

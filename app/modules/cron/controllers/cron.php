@@ -485,11 +485,13 @@ class cron extends MX_Controller {
 				$repeat_end         = strtotime($repeat_end);
 
 				$account = $this->model->get("*", INSTAGRAM_ACCOUNTS, "id = '".$row->account_id."' AND uid = '".$row->uid."' AND checkpoint = '0'");
+
 				if(!empty($account)){
 					$user = $this->model->get("*", USER_MANAGEMENT, "id = '".$row->uid."'");
 					if(!empty($user)){
 						$row->password = $account->password;
-						$row->username = $account->username;
+						echo $row->username = $account->username;
+						
 						$row->fid = $account->fid;
 						$row->timezone = $user->timezone;
 
@@ -520,6 +522,8 @@ class cron extends MX_Controller {
 								'result' => $response->code,
 								'message_error' => $response->txt
 							);
+						}else{
+							echo $response->st;
 						}
 
 						if($repeat == 1 && $time_post_day <= $repeat_end){

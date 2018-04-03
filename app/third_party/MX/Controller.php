@@ -287,7 +287,7 @@ class MX_Controller
 					define("PACKAGE_USER", "");
 			}
 		}else{
-			$array_permission_timezone_l1 = array('', 'logout', 'oauth', 'openid', 'cron', 'language', 'register', 'forgot_password', 'reset_password');
+			$array_permission_timezone_l1 = array('', 'logout', 'oauth', 'openid', 'cron', 'payments', 'language', 'register', 'forgot_password', 'reset_password');
 			$array_permission_timezone_l2 = array('ajax_login', 'ajax_register', 'ajax_forgot_password', 'ajax_reset_password');
 			if(!in_array(segment(1), $array_permission_timezone_l1) && !in_array(segment(2), $array_permission_timezone_l2)){
 				redirect(PATH);
