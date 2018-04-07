@@ -217,8 +217,6 @@ class payments extends MX_Controller {
 				$total_price = number_format($total_price,2);
 			}
 			$number = number_format($package->price,2);
-			$number = $number * 1.00;
-			$number = number_format($number,2);
 			
 		    $data['email'] = $payment->pagseguro_email;
 			$data['token'] = $payment->pagseguro_token;
