@@ -185,8 +185,8 @@
         <!-- Footer -->
         <div class="legal">
             <div class="copyright">
-                <a href="http://instaplus.com.br/painel/index.php/language?l=pt"><img src="http://instaplus.com.br/img/br-flag.png"></a>
-                <a href="http://instaplus.com.br/painel/index.php/language?l=en"><img src="http://instaplus.com.br/img/ru-flag.png"></a>
+                <a href="http://instaplus.com.br/painel/index.php/language?l=pt"><img src="https://instaplus.com.br/img/br-flag.png"></a>
+                <a href="http://instaplus.com.br/painel/index.php/language?l=en"><img src="https://instaplus.com.br/img/ru-flag.png"></a>
             </div>
         </div>
         <!-- #Footer -->
