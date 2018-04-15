@@ -120,7 +120,7 @@ class cron extends MX_Controller {
 					$user = $this->model->get("*", USER_MANAGEMENT, "id = '".$row->uid."'");
 					if(!empty($user)){
 						$row->password = $account->password;
-						$row->username = $account->username;
+						echo $row->username = $account->username;
 						$row->fid = $account->fid;
 						$row->timezone = $user->timezone;
 
@@ -132,9 +132,10 @@ class cron extends MX_Controller {
 							$row->proxy = "";
 						}
 						$row->description = unset_match_values($row->description,$row->blacklists);
-						echo $row->proxy."<br>";
-						$response = (object)Instagram_Post((object)$row);
 						
+						$response = (object)Instagram_Post((object)$row);
+						echo '<br>';
+
 					
 						$arr_update = array();
 						if(isset($response->st) && $response->st == "success"){
@@ -156,7 +157,7 @@ class cron extends MX_Controller {
 								'message_error' => $response->txt
 							);
 						}else{
-							print_r($response);
+							//print_r($response);
 						}
 
 						if($repeat == 1 && $time_post_day <= $repeat_end){

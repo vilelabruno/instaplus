@@ -227,7 +227,7 @@ class payments extends MX_Controller {
 			$data['itemDescription1'] = $package->name;
 			$data['itemAmount1'] = $number;
 			$data['itemQuantity1'] = '1';
-			$data['reference'] = 'REF'.strtoupper(random_string(8));
+			$data['reference'] = session("uid");
 			$data['redirectURL'] = cn("pagseguro_notify_payment");
 
 		    $header = array('Content-Type' => 'application/json; charset=UTF-8;');
@@ -238,6 +238,7 @@ class payments extends MX_Controller {
 		    }else{
 		    	$response = curlExec("https://ws.sandbox.pagseguro.uol.com.br/v2/checkout", $data, $header);
 			    $json = json_decode(json_encode(simplexml_load_string($response)));
+
 		    	header('Location: https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html?code=' . $json->code);
 		    }
 		}else{
@@ -248,12 +249,14 @@ class payments extends MX_Controller {
 	public function pagseguro_notify_payment(){
 		$payment = $this->model->get("*", PAYMENT);
 		$header = array('Content-Type' => 'application/json; charset=UTF-8;');
+
 		if($payment->sandbox == 0){
-			$response = curlExec("https://ws.pagseguro.uol.com.br/v2/transactions/".get("transaction_id")."?email=".$payment->pagseguro_email."&token=".$payment->pagseguro_token, null, $header);
+			$response = curlExec("https://ws.pagseguro.uol.com.br/v2/transactions/notifications/".post("notificationCode")."?email=".$payment->pagseguro_email."&token=".$payment->pagseguro_token, null, $header);
 	    }else{
-			$response = curlExec("https://ws.sandbox.pagseguro.uol.com.br/v2/transactions/".get("transaction_id")."?email=".$payment->pagseguro_email."&token=".$payment->pagseguro_token, null, $header);
+			$response = curlExec("https://ws.sandbox.pagseguro.uol.com.br/v2/transactions/notifications/".post("notificationCode")."?email=".$payment->pagseguro_email."&token=".$payment->pagseguro_token, null, $header);
 	    }
-		$result = json_decode(json_encode(simplexml_load_string($response)));
+		$result = simplexml_load_string($response);
+
 
 		if(is_object($result)){
 			switch ($result->status) {
@@ -264,6 +267,9 @@ class payments extends MX_Controller {
 					$status = "Awaiting Fulfillment";
 					break;
 				case 3:
+					$status = "Completed";
+					break;
+				case 4:
 					$status = "Completed";
 					break;
 				case 6:
@@ -277,7 +283,6 @@ class payments extends MX_Controller {
 					$status = "";
 					break;
 			}
-
 			$data = array(
 				"type"            => "pagseguro",
 				"uid"             => session("uid"),
@@ -297,11 +302,10 @@ class payments extends MX_Controller {
 			);
 
 			$this->db->insert(PAYMENT_HISTORY, $data);
-			if($result->status == 3){
-				$user = $this->model->get("*", USER_MANAGEMENT, "id = '".session("uid")."'");
+			if($result->status == 3 || $result->status == 4){
+				$user = $this->model->get("*", USER_MANAGEMENT, "id = '".$result->reference."'");
 				if(!empty($user)){
 					$package_new = $this->model->get("*", PACKAGE, "id = '".$result->items->item->id."'");
-					$package_old = $this->model->get("*", PACKAGE, "id = '".$user->package_id."'");
 					$package_id = $package_new->id;
 					if(!empty($package_old)){
 						if(strtotime(NOW) < strtotime($user->expiration_date)){
@@ -325,12 +329,14 @@ class payments extends MX_Controller {
 						"expiration_date" => $expiration_date
 					);
 
-					$this->db->update(USER_MANAGEMENT, $data, "id = '".session("uid")."'");
+					$this->db->update(USER_MANAGEMENT, $data, "id = '".$result->reference."'");
+				}else{
+					echo 'merda';
 				}
 			}
 		}
 
-		//redirect(PATH);
+		redirect(PATH);
 	}
 
 	public function do_payment_recurring(){

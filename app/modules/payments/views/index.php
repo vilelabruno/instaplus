@@ -8,6 +8,7 @@
 	</div>
 	<?php }?>
 	<div class="h3"><?=l('PICK THE BEST PLAN FOR YOU!')?></div>
+	<p>Escolha o melhor plano e ganhe de 50 à 200 seguidores por dia *</p>
 	<?php if(!empty($package)){?>
 
 	<?php foreach ($package as $row) {
@@ -48,5 +49,8 @@
 	<?php }?>
 
 	<?php }?>
+	
+	<p>* A expectativa de ganho descrita no site é baseada em resultados REAIS obtidos por nossos clientes. Este resultado pode variar dependendo da atividade e conteúdo específico de cada usuário, no qual não há nenhuma garantia de retorno mínimo ou máximo.</p>
 </div>
+
 <?=modules::run("blocks/footer")?>
