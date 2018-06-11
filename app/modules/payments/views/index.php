@@ -24,7 +24,7 @@
 			</div>
 		<div class="plan">
 			<div class="header">
-				<span><?=$payment->symbol?></span><?=$price[0]?><sup><?=(isset($price[1])?$price[1]:"00")?></sup>
+				<span></span><?=$price[0]?><sup><?=(isset($price[1])?$price[1]:"00")?></sup>
 				<p class="month">/<?=$row->day?> <?=l('days')?></p>
 			</div>
 			<div class="content">

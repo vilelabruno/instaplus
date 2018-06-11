@@ -18,11 +18,11 @@
 						<tbody>
 							<tr>
 								<td class="uc text-left"><a href="http://www.instaplus.com.br/painel/index.php/payments"><?=$package->name?> - Voltar</a></td>
-								<td class="text-center"><?=$payment->symbol?><?=number_format($package->price,2)?></td>
+								<td class="text-center"><?=number_format($package->price,2)?></td>
 							</tr>
 							<tr class="active" class="invoice_success col-green">
 								<td class="text-right"><?=l("")?></td>
-								<td class="text-center" style="font-size: 30px;color: #63c489;"><?=$payment->symbol?><?=number_format($package->price,2)?></td>
+								<td class="text-center" style="font-size: 30px;color: #63c489;"><?=number_format($package->price,2)?></td>
 							</tr>
 							<?php if(!empty($coupon)){?>
 							<tr class="invoice_warning">
@@ -38,7 +38,7 @@
 								$tolal =number_format($package->price-$discount,2)*100;
 								echo $payment->symbol.number_format($discount,2);
 								?>
-								<?=$payment->currency?></td>
+								</td>
 							</tr>
 							<?php }?>
 						</tbody>

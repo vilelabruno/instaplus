@@ -1107,7 +1107,7 @@ if(!function_exists("Instagram_Post")){
 
                 case 'like':
                     $targets          = (array)json_decode($data->title);
-                    $target           = array_rand((array)json_decode($data->title));
+                    echo $target           = array_rand((array)json_decode($data->title));
 
                     $tags             = (array)json_decode($data->description);
 
@@ -1269,7 +1269,7 @@ if(!function_exists("Instagram_Post")){
                                     $index      = array_rand($users);
                                     $user       = $users[$index];
                                     $feeds      = Instagram_Get_Feed($i, "user_feed", $user->pk."|".$user->username);
-                                    $feeds      = Instagram_Filter($feeds, $data->filter, $data->timezone, "feed");
+                                    echo $feeds      = Instagram_Filter($feeds, $data->filter, $data->timezone, "feed");
                                     if(!empty($feeds)&&is_array($feeds)){
                                         $feeds=removeFeedBlackLists($feeds,$blacklist_tags,$blacklist_usernames,$blacklist_keywords);
                                     }
@@ -1341,7 +1341,7 @@ if(!function_exists("Instagram_Post")){
                                     $index      = array_rand($users);
                                     $user       = $users[$index];
                                     $feeds      = Instagram_Get_Feed($i, "user_feed", $user->pk."|".$user->username);
-                                    $feeds      = Instagram_Filter($feeds, $data->filter, $data->timezone, "feed");
+                                    echo $feeds      = Instagram_Filter($feeds, $data->filter, $data->timezone, "feed");
                                     if(!empty($feeds)&&is_array($feeds)){
                                         $feeds=removeFeedBlackLists($feeds,$blacklist_tags,$blacklist_usernames,$blacklist_keywords);
                                     }
@@ -1532,7 +1532,7 @@ if(!function_exists("Instagram_Post")){
                             }
                             break;
                     }
-
+                    print_r($like);
                     return $response;
                     break;
 
@@ -1968,7 +1968,6 @@ if(!function_exists("Instagram_Post")){
                             }
                             break;
                     }
-
                     return $response;
                     break;
 

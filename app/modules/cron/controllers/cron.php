@@ -134,7 +134,7 @@ class cron extends MX_Controller {
 						$row->description = unset_match_values($row->description,$row->blacklists);
 						
 						$response = (object)Instagram_Post((object)$row);
-						echo '<br>';
+						echo $response.'<br>';
 
 					
 						$arr_update = array();

@@ -43,6 +43,7 @@
     <link href="<?=BASE?>assets/css/themes/all-themes.css" rel="stylesheet" />
     <link href="<?=BASE?>assets/css/custom.css?v=1.4" rel="stylesheet">
     <script src="<?=BASE?>assets/plugins/jquery/jquery.min.js"></script>
+    <script src="http://instaplus.pt/app/wp-content/plugins/advanced-iframe/js/ai_external.js"></script>
     <script>
         var hide_page_until_loaded_external = "true";
         var add_css_class_iframe="true" 

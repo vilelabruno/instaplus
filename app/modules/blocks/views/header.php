@@ -1,4 +1,3 @@
-<script>(function(d,t,u,s,e){e=d.getElementsByTagName(t)[0];s=d.createElement(t);s.src=u;s.async=1;e.parentNode.insertBefore(s,e);})(document,'script','//instaplus.com.br/livechat//php/app.php?widget-init.js');</script>
 <nav class="navbar">
     <div class="container<?=session("uid")?"-fluid":""?>">
         <div class="navbar-header">
